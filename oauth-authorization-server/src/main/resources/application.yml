@@ -1,7 +1,16 @@
 server:
   port: 8083
+  ssl:
+    enabled: true
+    key-store: classpath:keystore.p12
+    key-store-password: password
+    keyStoreType: PKCS12
+    keyALias: keycloak
 
-spring:
+security:
+  require-ssl: true
+
+  spring:
   datasource:
     username: sa
     url: jdbc:h2:mem:testdb
@@ -17,3 +26,6 @@ keycloak:
 
 #john@test.com / 123
 #mike@other.com / pass
+#[root@ip-10-0-57-186 greatbig.club]# openssl pkcs12 -export -in fullchain.pem -inkey privkey.pem -out keystore.p12 -name keycloak -CAfile chain.pem -caname root
+#Enter Export Password: password
+#Verifying - Enter Export Password: password
